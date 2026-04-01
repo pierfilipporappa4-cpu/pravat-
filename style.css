@@ -78,7 +78,10 @@ a {
     color: inherit;
 }
 
-h1, h2, h3, .serif-text {
+h1,
+h2,
+h3,
+.serif-text {
     font-family: var(--font-heading);
     font-weight: 400;
     color: var(--primary-dark);
@@ -242,9 +245,22 @@ button:focus-visible {
 }
 
 @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-    40% { transform: translateY(8px); }
-    60% { transform: translateY(4px); }
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(8px);
+    }
+
+    60% {
+        transform: translateY(4px);
+    }
 }
 
 /* ─── Cards Section ──────────────────────────────────── */
@@ -742,7 +758,7 @@ footer {
     }
 
     .hero p {
-        font-size: 1rem;
+        font-size: 0.9rem;
         margin-bottom: 2rem;
     }
 
@@ -827,7 +843,7 @@ footer {
     }
 
     .page-hero p {
-        font-size: 0.98rem;
+        font-size: 0.92rem;
         line-height: 1.65;
     }
 
@@ -958,10 +974,10 @@ footer {
     }
 
     /* — Hero (homepage) —
-       navbar stacked ≈ 8.5rem + aria visiva 2.5rem = 11rem */
+       bilanciato per risultare centrato rispetto alla navbar stacked */
     .hero {
-        padding-top: 11rem;
-        padding-bottom: 4.5rem;
+        padding-top: 18rem;
+        padding-bottom: 6rem;
         padding-left: 1.25rem;
         padding-right: 1.25rem;
     }
@@ -984,7 +1000,7 @@ footer {
     }
 
     .hero p {
-        font-size: 0.97rem;
+        font-size: 0.88rem;
         line-height: 1.65;
         margin-bottom: 2rem;
     }
@@ -1082,7 +1098,7 @@ footer {
     }
 
     .page-hero p {
-        font-size: 0.93rem;
+        font-size: 0.88rem;
         line-height: 1.65;
     }
 
@@ -1205,9 +1221,13 @@ footer {
 
 /* ─── Reduced motion ─────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
+    html {
+        scroll-behavior: auto;
+    }
 
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
         animation: none !important;
         transition: none !important;
     }

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="it">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galleria | Dott. Aurelio Pravatà</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .page-hero {
+            padding: 10rem 2rem 4rem;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+
+        .page-hero .hero-subtitle {
+            margin-bottom: 1rem;
+        }
+
+
+        .page-hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+
+
+        .page-hero p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+
+        .gallery-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 2rem 8rem;
+        }
+
+
+        .gallery-era {
+            margin-bottom: 6rem;
+        }
+
+
+        .gallery-era-header {
+            display: flex;
+            align-items: baseline;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+
+        .gallery-era-header h2 {
+            font-size: 1.8rem;
+            text-align: left;
+            margin: 0;
+        }
+
+
+        .gallery-era-header span {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+        }
+
+
+        /* Masonry Grid: gestisce foto con proporzioni diverse */
+        .masonry-grid {
+            column-count: 3;
+            column-gap: 1.2rem;
+        }
+
+
+        .masonry-grid img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: 1.2rem;
+            border-radius: 4px;
+            transition: opacity 0.3s ease;
+        }
+
+
+        .masonry-grid img:hover {
+            opacity: 0.85;
+        }
+
+
+        @media (max-width: 900px) {
+            .masonry-grid {
+                column-count: 2;
+            }
+        }
+
+
+        @media (max-width: 500px) {
+            .masonry-grid {
+                column-count: 1;
+            }
+        }
+    </style>
+
+    <!-- Stili aggiuntivi solo per il carosello -->
+    <style>
+        .carousel-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 0 4rem;
+        }
+
+        .carousel-stage-row {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .carousel-stage {
+            width: 30vw;
+            min-width: 180px;
+            max-width: 480px;
+            position: relative;
+        }
+
+        .carousel-stage img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 4px;
+            transition: opacity 0.25s ease;
+        }
+
+        .carousel-stage img.is-fading {
+            opacity: 0;
+        }
+
+        .carousel-btn {
+            flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            background: none;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s, border-color 0.2s, background 0.2s;
+            line-height: 1;
+        }
+
+        .carousel-btn:hover {
+            color: var(--primary-green);
+            border-color: var(--primary-green);
+            background: none;
+        }
+
+        .carousel-btn:disabled {
+            opacity: 0.3;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        .carousel-info {
+            margin-top: 1.6rem;
+            text-align: center;
+            width: 30vw;
+            min-width: 180px;
+            max-width: 480px;
+        }
+
+        .carousel-caption {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 0.6rem;
+            line-height: 1.5;
+        }
+
+        .carousel-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .carousel-era-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--primary-green);
+            font-weight: 500;
+        }
+
+        .carousel-counter {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 600px) {
+
+            .carousel-stage,
+            .carousel-info {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .carousel-stage-row {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .carousel-stage {
+                order: -1;
+                margin-bottom: 0.5rem;
+            }
+
+            .carousel-btn {
+                margin: 0 1rem;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+
+    <nav class="top-bar">
+        <a href="index.html" class="logo-text">Dott. Aurelio Pravatà</a>
+        <a href="index.html" class="menu-btn">&larr; Home</a>
+    </nav>
+
+
+    <div class="page-hero">
+        <div class="hero-subtitle">Archivio Fotografico</div>
+        <h1>Galleria Storica</h1>
+        <p>Un percorso visivo attraverso decenni di medicina, attività professionale e impegno istituzionale.</p>
+    </div>
+
+
+    <div class="gallery-section">
+        <div class="carousel-wrapper">
+
+            <div class="carousel-stage-row">
+                <button class="carousel-btn" id="btn-prev" aria-label="Foto precedente">&#8592;</button>
+                <div class="carousel-stage">
+                    <img id="carousel-img" src="" alt="" width="600" height="800" loading="eager">
+                </div>
+                <button class="carousel-btn" id="btn-next" aria-label="Foto successiva">&#8594;</button>
+            </div>
+
+            <div class="carousel-info">
+                <p class="carousel-caption" id="carousel-caption"></p>
+                <div class="carousel-meta">
+                    <span class="carousel-era-label" id="carousel-era"></span>
+                    <span class="carousel-counter" id="carousel-counter"></span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <footer id="contatti">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h2>Studio Medico<br>Dott. Aurelio Pravatà</h2>
+                <p>📍 Via Barratina 33, 90018 Termini Imerese (PA)</p>
+                <p>📞 +39 091 8885139</p>
+                <p>📞 +39 348 8058611</p>
+                <p>✉️ aurelio.pravata@libero.it</p>
+                <p>✉️ aureliopravata@pec.it</p>
+            </div>
+            <div class="footer-col-right">
+                <ul>
+                    <li><a href="curriculum.html">Curriculum</a></li>
+                    <li><a href="galleria.html">Galleria Storica</a></li>
+                    <li><a href="interviste.html">Interviste Video</a></li>
+                    <li><a href="covid.html">Ricerca Covid</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>&copy; 2026 DOTT. AURELIO PRAVATÀ. TUTTI I DIRITTI RISERVATI.</div>
+            <div>PRIVACY POLICY E NOTE LEGALI</div>
+        </div>
+    </footer>
+
+
+    <script>
+        const slides = [
+            // La Maturità Professionale — 2015 · Oggi
+            {
+                src: 'assets/foto1.jpg',
+                alt: 'Foto 1',
+                caption: 'Didascalia prova.',
+                era: 'Periodo',
+                period: 'Data'
+            },
+            {
+                src: 'assets/foto2.jpg',
+                alt: 'Foto 2',
+                caption: 'Didascalia prova.',
+                era: 'Periodo',
+                period: 'Data'
+            },
+            {
+                src: 'assets/foto3.jpg',
+                alt: 'Foto 3',
+                caption: 'Didascalia prova.',
+                era: 'Periodo',
+                period: 'Data'
+            },
+            /*
+            {
+                src: 'https://picsum.photos/seed/med04/700/900',
+                alt: 'Laboratorio di Ricerca',
+                caption: 'Attività di ricerca presso il laboratorio di diagnostica specialistica.',
+                era: 'La Maturità Professionale',
+                period: '2015 — Oggi'
+            },
+            {
+                src: 'https://picsum.photos/seed/med05/800/500',
+                alt: 'Convegno Medico',
+                caption: 'Convegno regionale sulla sicurezza nei luoghi di lavoro, D.Lgs. 81/08.',
+                era: 'La Maturità Professionale',
+                period: '2015 — Oggi'
+            },
+            // La Formazione Internazionale — 2000 · 2014
+            {
+                src: 'https://picsum.photos/seed/med06/800/500',
+                alt: 'Corso di Aggiornamento',
+                caption: 'Corso di perfezionamento avanzato in Medicina del Lavoro e Igiene Industriale.',
+                era: 'La Formazione Internazionale',
+                period: '2000 — 2014'
+            },
+            {
+                src: 'https://picsum.photos/seed/med07/500/750',
+                alt: 'Seminario Specialistico',
+                caption: 'Seminario internazionale sulle sindromi allergiche professionali.',
+                era: 'La Formazione Internazionale',
+                period: '2000 — 2014'
+            },
+            {
+                src: 'https://picsum.photos/seed/med08/700/500',
+                alt: 'Gruppo di Lavoro',
+                caption: 'Tavolo di lavoro interdisciplinare su epidemiologia e prevenzione.',
+                era: 'La Formazione Internazionale',
+                period: '2000 — 2014'
+            },
+            // Gli Inizi — 1972 · 1999
+            {
+                src: 'https://picsum.photos/seed/med09/600/750',
+                alt: 'Laurea in Medicina',
+                caption: 'Laurea in Medicina e Chirurgia, Università degli Studi di Palermo, 21 febbraio 1972.',
+                era: 'Gli Inizi',
+                period: '1972 — 1999'
+            },
+            {
+                src: 'https://picsum.photos/seed/med10/800/600',
+                alt: 'Ospedale SS. Trinità',
+                caption: 'Prima équipe all\'Ospedale "SS. Trinità" di Termini Imerese.',
+                era: 'Gli Inizi',
+                period: '1972 — 1999'
+            },
+            {
+                src: 'https://picsum.photos/seed/med11/600/600',
+                alt: 'Specializzazione',
+                caption: 'Conseguimento della Specializzazione in Medicina del Lavoro con votazione 48/50.',
+                era: 'Gli Inizi',
+                period: '1972 — 1999'
+            */
+        ];
+
+        let current = 0;
+
+        const img = document.getElementById('carousel-img');
+        const caption = document.getElementById('carousel-caption');
+        const eraLabel = document.getElementById('carousel-era');
+        const counter = document.getElementById('carousel-counter');
+        const btnPrev = document.getElementById('btn-prev');
+        const btnNext = document.getElementById('btn-next');
+
+        function update(index, direction) {
+            img.classList.add('is-fading');
+
+            setTimeout(() => {
+                const s = slides[index];
+                img.src = s.src;
+                img.alt = s.alt;
+                caption.textContent = s.caption;
+                eraLabel.textContent = s.era + ' · ' + s.period;
+                counter.textContent = (index + 1) + ' / ' + slides.length;
+                btnPrev.disabled = index === 0;
+                btnNext.disabled = index === slides.length - 1;
+                img.classList.remove('is-fading');
+            }, 200);
+        }
+
+        btnPrev.addEventListener('click', () => {
+            if (current > 0) { current--; update(current); }
+        });
+
+        btnNext.addEventListener('click', () => {
+            if (current < slides.length - 1) { current++; update(current); }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' && current > 0) { current--; update(current); }
+            if (e.key === 'ArrowRight' && current < slides.length - 1) { current++; update(current); }
+        });
+
+        // Init
+        update(0);
+    </script>
+
+
+</body>
+
+
+</html>

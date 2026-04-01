@@ -1,0 +1,1214 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+/*
+  Art direction:
+  Sito medico personale — elegante, non corporate.
+  Palette: beige caldo + verde scuro + accento ambra.
+  Tipografia: Lora (display, headings) + Inter (body).
+  Densità: generosa su desktop, ordinata e respirata su mobile.
+*/
+
+/* ─── CSS Custom Properties ─────────────────────────── */
+:root {
+    --bg-main: #f7f3ee;
+    --bg-soft: #efe7de;
+    --bg-white: #ffffff;
+
+    --primary-dark: #2f3a33;
+    --primary-green: #5c7a67;
+    --primary-green-dark: #435b4b;
+
+    --accent-warm: #c79662;
+    --accent-warm-dark: #a97948;
+
+    --text-dark: #2b2d2a;
+    --text-muted: #6f736e;
+    --text-soft: #8a8f88;
+
+    --border-color: #e3ddd5;
+    --border-strong: #d8cec2;
+
+    --shadow-sm: 0 4px 12px rgba(47, 58, 51, 0.05);
+    --shadow-md: 0 10px 24px rgba(47, 58, 51, 0.08);
+    --shadow-lg: 0 20px 48px rgba(47, 58, 51, 0.12);
+
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 24px;
+    --radius-pill: 999px;
+
+    --container: 1180px;
+
+    --font-heading: 'Lora', serif;
+    --font-body: 'Inter', sans-serif;
+
+    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Reset & Base ───────────────────────────────────── */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-body);
+    font-weight: 300;
+    color: var(--text-dark);
+    background: linear-gradient(to bottom, #f5efe8 0%, var(--bg-main) 30%, var(--bg-main) 100%);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+}
+
+h1, h2, h3, .serif-text {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    color: var(--primary-dark);
+    line-height: 1.2;
+}
+
+p {
+    max-width: 70ch;
+}
+
+section {
+    width: 100%;
+}
+
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--accent-warm);
+    outline-offset: 3px;
+    border-radius: 10px;
+}
+
+/* ─── Top Bar / Navigation ───────────────────────────── */
+.top-bar {
+    width: min(var(--container), calc(100% - 2rem));
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 0;
+}
+
+.logo-text {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--primary-dark);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+}
+
+.top-bar-right {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.menu-btn,
+.cta-fixed {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 1.15rem;
+    border-radius: var(--radius-pill);
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    border: 1px solid rgba(47, 58, 51, 0.08);
+    background: var(--bg-white);
+    color: var(--primary-dark);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition);
+}
+
+.menu-btn {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.cta-fixed {
+    font-size: 0.85rem;
+}
+
+.menu-btn:hover,
+.cta-fixed:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent-warm);
+}
+
+/* ─── Hero (Homepage) ────────────────────────────────── */
+.hero {
+    position: relative;
+    min-height: 75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 8rem 1.5rem 4rem;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 1.5rem;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, rgba(92, 122, 103, 0), var(--primary-green));
+    opacity: 0.3;
+}
+
+.hero-subtitle {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 2rem;
+    font-weight: 600;
+    color: var(--primary-green);
+    background: rgba(255, 255, 255, 0.6);
+    padding: 0.5rem 1.25rem;
+    border-radius: var(--radius-pill);
+    border: 1px solid rgba(92, 122, 103, 0.08);
+    max-width: 90vw;
+}
+
+.hero h1 {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+}
+
+.hero p {
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    color: var(--text-muted);
+    max-width: 680px;
+    margin-bottom: 2.5rem;
+}
+
+.scroll-hint {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: 0.4rem;
+    color: var(--primary-green);
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    opacity: 0.95;
+}
+
+.scroll-hint::after {
+    content: "↓";
+    font-size: 1.35rem;
+    line-height: 1;
+    animation: bounce 1.8s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(8px); }
+    60% { transform: translateY(4px); }
+}
+
+/* ─── Cards Section ──────────────────────────────────── */
+.cards-section {
+    padding: 1.5rem 2rem 7rem;
+    max-width: var(--container);
+    margin: 0 auto;
+}
+
+.cards-intro {
+    text-align: center;
+    margin-bottom: 2.25rem;
+}
+
+.cards-intro h2 {
+    font-size: clamp(2rem, 3vw, 2.7rem);
+    margin-bottom: 0.65rem;
+}
+
+.cards-intro p {
+    margin: 0 auto;
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.4rem;
+    align-items: stretch;
+}
+
+.card {
+    min-width: 0;
+    width: 100%;
+    background: var(--bg-white);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--accent-warm);
+}
+
+.card-img-placeholder,
+.card-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    background-color: var(--bg-soft);
+    flex-shrink: 0;
+}
+
+.card-content {
+    min-width: 0;
+    padding: 1.5rem 1.35rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-content h3 {
+    font-size: 1.28rem;
+    margin-bottom: 0.8rem;
+}
+
+.card-content p {
+    font-size: 0.96rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+.card-btn {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: auto;
+    font-size: 0.79rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent-warm-dark);
+    transition: color var(--transition), transform var(--transition);
+}
+
+.card:hover .card-btn {
+    color: var(--primary-dark);
+    transform: translateX(2px);
+}
+
+/* ─── Testimonials ───────────────────────────────────── */
+.testimonials {
+    max-width: var(--container);
+    margin: 0 auto 6rem;
+    padding: 0 2rem;
+}
+
+.testimonials-container {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.94));
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 3rem 2rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.testimonials h2 {
+    text-align: center;
+    font-size: clamp(1.8rem, 2.6vw, 2.4rem);
+    margin-bottom: 2rem;
+}
+
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+blockquote {
+    background: var(--bg-white);
+    border: 1px solid var(--border-color);
+    border-left: 3px solid var(--accent-warm);
+    border-radius: var(--radius-sm);
+    padding: 1.5rem;
+    color: var(--text-muted);
+    font-size: 1rem;
+    font-style: italic;
+    box-shadow: var(--shadow-sm);
+    line-height: 1.7;
+}
+
+/* ─── Footer ─────────────────────────────────────────── */
+footer {
+    background: linear-gradient(180deg, #344138 0%, #2f3a33 100%);
+    color: var(--bg-white);
+    padding: 4.8rem 3rem 2rem;
+    margin-top: 2rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    padding-bottom: 3rem;
+}
+
+.footer-col h2 {
+    color: var(--bg-white);
+    font-size: 2rem;
+    margin-bottom: 1.25rem;
+    max-width: 420px;
+}
+
+.footer-col p {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.97rem;
+    margin-bottom: 0.55rem;
+}
+
+.footer-col-right {
+    display: flex;
+    justify-content: flex-end;
+    text-align: right;
+}
+
+.footer-col-right ul {
+    list-style: none;
+}
+
+.footer-col-right li {
+    margin-bottom: 1rem;
+}
+
+.footer-col-right a {
+    color: var(--bg-white);
+    text-decoration: none;
+    font-size: 0.84rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.82;
+    transition: opacity var(--transition), transform var(--transition);
+}
+
+.footer-col-right a:hover {
+    opacity: 1;
+    transform: translateX(-2px);
+}
+
+.footer-bottom {
+    max-width: 1100px;
+    margin: 1.6rem auto 0;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.74rem;
+    color: rgba(255, 255, 255, 0.52);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ─── Page Hero (pagine interne) ─────────────────────── */
+.page-hero {
+    padding: 10rem 1.5rem 4rem;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.page-hero h1 {
+    font-size: clamp(2.2rem, 6vw, 3rem);
+    margin-bottom: 1rem;
+}
+
+.page-hero p {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    margin: 0 auto;
+}
+
+/* ─── Content Section (Curriculum) ──────────────────── */
+.content-section {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 8rem;
+}
+
+.section-block {
+    margin-bottom: 4rem;
+}
+
+.section-block h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--border-color);
+    text-align: left;
+}
+
+.section-block ul {
+    list-style: none;
+}
+
+.section-block li {
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1.5rem;
+}
+
+.section-block li strong {
+    color: var(--text-dark);
+    font-weight: 500;
+    flex-shrink: 0;
+}
+
+.section-block li span {
+    text-align: right;
+}
+
+/* ─── Timeline ───────────────────────────────────────── */
+.timeline {
+    border-left: 1px solid var(--border-color);
+    padding-left: 2rem;
+    margin-left: 0.5rem;
+    margin-top: 2rem;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 3.5rem;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.35rem;
+    top: 0.4rem;
+    width: 10px;
+    height: 10px;
+    background: var(--bg-white);
+    border: 2px solid var(--primary-green);
+    border-radius: 50%;
+}
+
+.timeline-date {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--primary-green);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-item h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.6rem;
+    line-height: 1.3;
+}
+
+.timeline-item p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+/* ─── Interviews Section ─────────────────────────────── */
+.interviews-section {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 8rem;
+}
+
+.interview-item {
+    padding: 3.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.interview-item:last-child {
+    border-bottom: none;
+}
+
+.interview-meta {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--primary-green);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.interview-item h2 {
+    font-size: clamp(1.4rem, 4vw, 1.8rem);
+    margin-bottom: 1.25rem;
+    line-height: 1.3;
+}
+
+.interview-item p {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    line-height: 1.7;
+}
+
+/* ─── Video Responsive 16:9 ──────────────────────────── */
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background-color: var(--primary-dark);
+    box-shadow: var(--shadow-md);
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* ─── Research / Text Block ──────────────────────────── */
+.text-block {
+    margin-bottom: 4.5rem;
+}
+
+.text-block h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.text-block p {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+}
+
+/* ─── Iter diagnostico (numbered list) ──────────────── */
+.iter-list {
+    list-style: none;
+    counter-reset: iter-counter;
+    margin: 2rem 0;
+}
+
+.iter-list li {
+    counter-increment: iter-counter;
+    padding: 1.25rem 0 1.25rem 4rem;
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+.iter-list li::before {
+    content: counter(iter-counter);
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2.5rem;
+    height: 2.5rem;
+    background: var(--primary-green);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+/* ═══════════════════════════════════════════════════════
+   RESPONSIVE — Tablet ≤1100px
+   ═══════════════════════════════════════════════════════ */
+@media (max-width: 1100px) {
+    .cards-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .hero h1 {
+        white-space: normal;
+        font-size: clamp(2.4rem, 6vw, 3.8rem);
+        line-height: 1.1;
+    }
+
+    .testimonial-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════
+   RESPONSIVE — Mobile ≤768px
+   Obiettivo: gerarchia visiva chiara, respiro tra sezioni,
+   tipografia scalata, padding coerente su tutte le pagine.
+   ═══════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+    /* — Navigazione — */
+    .top-bar {
+        width: calc(100% - 2rem);
+        padding: 1.25rem 0;
+    }
+
+    .logo-text {
+        font-size: 1.15rem;
+    }
+
+    .top-bar-right {
+        gap: 0.5rem;
+    }
+
+    .menu-btn,
+    .cta-fixed {
+        min-height: 42px;
+        padding: 0 0.85rem;
+        font-size: 0.75rem;
+    }
+
+    /* — Hero (homepage) — */
+    .hero {
+        min-height: auto;
+        padding: 7rem 1.5rem 5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.7rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .hero h1 {
+        font-size: clamp(2.2rem, 9vw, 3rem);
+        margin-bottom: 1.25rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    /* — Cards — */
+    .cards-section {
+        padding: 4rem 1.25rem 5rem;
+    }
+
+    .cards-intro {
+        margin-bottom: 2rem;
+    }
+
+    .cards-intro h2 {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .cards-intro p {
+        font-size: 0.95rem;
+    }
+
+    /* — Testimonials — */
+    .testimonials {
+        padding: 0 1.25rem;
+        margin-bottom: 4rem;
+    }
+
+    .testimonials-container {
+        padding: 2.5rem 1.5rem;
+        border-radius: var(--radius-md);
+    }
+
+    .testimonials h2 {
+        font-size: 1.6rem;
+        margin-bottom: 1.75rem;
+    }
+
+    blockquote {
+        font-size: 0.95rem;
+        line-height: 1.7;
+        padding: 1.25rem 1.1rem;
+    }
+
+    /* — Footer — */
+    footer {
+        padding: 4rem 1.5rem 2rem;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2.5rem;
+        padding-bottom: 2.5rem;
+    }
+
+    .footer-col h2 {
+        font-size: 1.6rem;
+        margin-bottom: 1rem;
+    }
+
+    .footer-col-right {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 0.5rem;
+        margin-top: 1.25rem;
+    }
+
+    /* — Page Hero (pagine interne) — */
+    .page-hero {
+        padding: 7rem 2rem 3rem;
+    }
+
+    .page-hero h1 {
+        font-size: clamp(1.9rem, 7vw, 2.5rem);
+        margin-bottom: 0.85rem;
+    }
+
+    .page-hero p {
+        font-size: 0.98rem;
+        line-height: 1.65;
+    }
+
+    /* — Curriculum — */
+    .content-section {
+        padding: 2rem 2rem 5rem;
+    }
+
+    .section-block {
+        margin-bottom: 3rem;
+    }
+
+    .section-block h2 {
+        font-size: 1.4rem;
+    }
+
+    .section-block li {
+        flex-direction: column;
+        gap: 0.3rem;
+        align-items: flex-start;
+        padding: 0.9rem 0;
+    }
+
+    .section-block li span {
+        text-align: left;
+        font-size: 0.88rem;
+        color: var(--text-soft);
+    }
+
+    /* — Timeline — */
+    .timeline {
+        padding-left: 1.5rem;
+        margin-left: 0.25rem;
+    }
+
+    .timeline-item {
+        margin-bottom: 2.75rem;
+    }
+
+    .timeline-item::before {
+        left: -1.85rem;
+    }
+
+    .timeline-item h3 {
+        font-size: 1.1rem;
+    }
+
+    /* — Interviste — */
+    .interviews-section {
+        padding: 2rem 2rem 5rem;
+    }
+
+    .interview-item {
+        padding: 2.75rem 0;
+    }
+
+    .interview-item h2 {
+        font-size: 1.35rem;
+        margin-bottom: 1rem;
+    }
+
+    .interview-item p {
+        font-size: 0.97rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* — Ricerca / Text blocks — */
+    .text-block {
+        margin-bottom: 3rem;
+    }
+
+    .text-block h2 {
+        font-size: 1.4rem;
+    }
+
+    .text-block p {
+        font-size: 0.97rem;
+        line-height: 1.75;
+    }
+
+    /* — Iter list — */
+    .iter-list li {
+        padding-left: 3.5rem;
+        font-size: 0.97rem;
+    }
+
+    .iter-list li::before {
+        width: 2.2rem;
+        height: 2.2rem;
+        font-size: 0.85rem;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════
+   RESPONSIVE — Small mobile ≤480px
+   ═══════════════════════════════════════════════════════ */
+@media (max-width: 480px) {
+
+    /* — Navigazione stacked — */
+    .top-bar {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        padding: 1.75rem 1rem 1.5rem;
+        width: 100%;
+        border-bottom: 1px solid rgba(47, 58, 51, 0.07);
+    }
+
+    .logo-text {
+        font-size: 1.35rem;
+        letter-spacing: -0.01em;
+    }
+
+    .top-bar-right {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .menu-btn,
+    .cta-fixed {
+        min-height: 40px;
+        padding: 0 0.75rem;
+        font-size: 0.72rem;
+        width: 100%;
+    }
+
+    /* — Hero (homepage) —
+       navbar stacked ≈ 8.5rem + aria visiva 2.5rem = 11rem */
+    .hero {
+        padding-top: 11rem;
+        padding-bottom: 4.5rem;
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.65rem;
+        padding: 0.4rem 0.9rem;
+        margin-bottom: 1.25rem;
+        max-width: 88vw;
+        white-space: normal;
+        line-height: 1.5;
+        display: inline-block;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: clamp(2rem, 10.5vw, 2.6rem);
+        line-height: 1.1;
+        margin-bottom: 1.1rem;
+    }
+
+    .hero p {
+        font-size: 0.97rem;
+        line-height: 1.65;
+        margin-bottom: 2rem;
+    }
+
+    /* — Cards — */
+    .cards-section {
+        padding: 3.5rem 1.1rem 4.5rem;
+    }
+
+    .cards-intro h2 {
+        font-size: 1.65rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .cards-intro p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    .cards-container {
+        grid-template-columns: 1fr !important;
+        gap: 1.25rem;
+    }
+
+    .card-img-placeholder,
+    .card-img {
+        height: 180px;
+    }
+
+    .card-content {
+        padding: 1.25rem 1.1rem 1.2rem;
+    }
+
+    .card-content h3 {
+        font-size: 1.15rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .card-content p {
+        font-size: 0.92rem;
+        margin-bottom: 1.2rem;
+    }
+
+    /* — Testimonials — */
+    .testimonials {
+        padding: 0 1rem;
+        margin-bottom: 3rem;
+    }
+
+    .testimonials-container {
+        padding: 2rem 1.1rem;
+        border-radius: var(--radius-md);
+    }
+
+    .testimonials h2 {
+        font-size: 1.4rem;
+        margin-bottom: 1.5rem;
+    }
+
+    blockquote {
+        padding: 1.1rem 1rem;
+        font-size: 0.88rem;
+        line-height: 1.65;
+    }
+
+    /* — Footer — */
+    footer {
+        padding: 3.5rem 1.25rem 2rem;
+    }
+
+    .footer-grid {
+        gap: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    .footer-col h2 {
+        font-size: 1.4rem;
+        margin-bottom: 0.9rem;
+    }
+
+    .footer-col p {
+        font-size: 0.9rem;
+    }
+
+    /* — Page Hero (pagine interne)
+       navbar stacked ≈ 8.5rem + aria 2rem = 10.5rem */
+    .page-hero {
+        padding: 10.5rem 2rem 2.5rem;
+    }
+
+    .page-hero h1 {
+        font-size: 1.85rem;
+        margin-bottom: 0.8rem;
+        line-height: 1.15;
+    }
+
+    .page-hero p {
+        font-size: 0.93rem;
+        line-height: 1.65;
+    }
+
+    /* — Curriculum — */
+    .content-section {
+        padding: 1.5rem 2rem 5rem;
+    }
+
+    .section-block {
+        margin-bottom: 2.5rem;
+    }
+
+    .section-block h2 {
+        font-size: 1.3rem;
+        padding-bottom: 0.6rem;
+        margin-bottom: 1.1rem;
+    }
+
+    .section-block li {
+        padding: 0.85rem 0;
+        font-size: 0.92rem;
+    }
+
+    /* — Timeline — */
+    .timeline {
+        padding-left: 1.25rem;
+        margin-left: 0;
+        margin-top: 1.5rem;
+    }
+
+    .timeline-item {
+        margin-bottom: 2.25rem;
+    }
+
+    .timeline-item::before {
+        left: -1.6rem;
+        width: 9px;
+        height: 9px;
+    }
+
+    .timeline-date {
+        font-size: 0.68rem;
+        letter-spacing: 0.08em;
+        margin-bottom: 0.4rem;
+    }
+
+    .timeline-item h3 {
+        font-size: 1.05rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .timeline-item p {
+        font-size: 0.9rem;
+        line-height: 1.65;
+    }
+
+    /* — Interviste — */
+    .interviews-section {
+        padding: 1.5rem 2rem 5rem;
+    }
+
+    .interview-item {
+        padding: 2.25rem 0;
+    }
+
+    .interview-meta {
+        font-size: 0.68rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .interview-item h2 {
+        font-size: 1.3rem;
+        margin-bottom: 0.85rem;
+    }
+
+    .interview-item p {
+        font-size: 0.93rem;
+        margin-bottom: 1.25rem;
+        line-height: 1.7;
+    }
+
+    /* — Ricerca / Text blocks — */
+    .text-block {
+        margin-bottom: 2.5rem;
+    }
+
+    .text-block h2 {
+        font-size: 1.3rem;
+        padding-bottom: 0.6rem;
+        margin-bottom: 1.1rem;
+    }
+
+    .text-block p {
+        font-size: 0.93rem;
+        line-height: 1.75;
+        margin-bottom: 1.1rem;
+    }
+
+    /* — Iter diagnostico — */
+    .iter-list {
+        margin: 1.5rem 0;
+    }
+
+    .iter-list li {
+        padding-left: 0;
+        padding-top: 3.5rem;
+        padding-bottom: 1.5rem;
+        font-size: 0.93rem;
+        line-height: 1.65;
+    }
+
+    .iter-list li::before {
+        top: 1.25rem;
+        transform: none;
+        width: 2rem;
+        height: 2rem;
+        font-size: 0.8rem;
+    }
+}
+
+/* ─── Reduced motion ─────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
